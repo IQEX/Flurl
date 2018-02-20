@@ -4,7 +4,7 @@
     <TargetFramework>net471</TargetFramework>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 		<PackageId>Flurl</PackageId>
-    <Version>2.6.0</Version>
+    <Version>2.7.0-pre2</Version>
     <Authors>Todd Menier</Authors>
     <Description>A fluent, portable URL builder. To make HTTP calls off the fluent chain, check out Flurl.Http.</Description>
     <PackageProjectUrl>http://tmenier.github.io/Flurl</PackageProjectUrl>
