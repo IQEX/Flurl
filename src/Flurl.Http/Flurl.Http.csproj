@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net45;netstandard1.3;netstandard1.1;</TargetFrameworks>
+    <TargetFramework>net471</TargetFramework>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 	  <PackageId>Flurl.Http</PackageId>
     <Version>2.1.1</Version>
@@ -27,7 +27,6 @@
 
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
-    <PackageReference Include="Flurl" Version="2.6.0" />
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFramework)' == 'netstandard1.3'">
