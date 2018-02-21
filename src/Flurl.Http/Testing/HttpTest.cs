@@ -189,15 +189,5 @@ namespace Flurl.Http.Testing
         }
         private static void SetCurrentTest(HttpTest test) => System.Runtime.Remoting.Messaging.CallContext.LogicalSetData("FlurlHttpTest", test);
         private static HttpTest GetCurrentTest() => System.Runtime.Remoting.Messaging.CallContext.LogicalGetData("FlurlHttpTest") as HttpTest;
-#elif NETSTANDARD1_3 || NETSTANDARD2_0
-		
-		private static System.Threading.AsyncLocal<HttpTest> _test = new System.Threading.AsyncLocal<HttpTest>();
-		private static void SetCurrentTest(HttpTest test) => _test.Value = test;
-		private static HttpTest GetCurrentTest() => _test.Value;
-#elif NETSTANDARD1_1
-		private static HttpTest _test;
-		private static void SetCurrentTest(HttpTest test) => _test = test;
-		private static HttpTest GetCurrentTest() => _test;
-#endif
     }
 }
