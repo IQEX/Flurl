@@ -45,7 +45,7 @@ namespace Flurl.Util
 #if !NETSTANDARD1_0
 				obj is IConvertible c ? c.ToString(CultureInfo.InvariantCulture) :
 #endif
-				obj is IFormattable f ? f.ToString(null, CultureInfo.InvariantCulture) :
+				obj is IFormattable f ? f.ToString(format: null, formatProvider: CultureInfo.InvariantCulture) :
 				obj.ToString();
 		}
 
@@ -64,7 +64,7 @@ namespace Flurl.Util
 			if (i == -1)
 				return new[] { s };
 
-			return new[] { s.Substring(0, i), s.Substring(i + 1) };
+			return new[] { s.Substring(startIndex: 0, length: i), s.Substring(i + 1) };
 		}
 
 		private static IEnumerable<KeyValuePair<string, object>> StringToKV(string s) {
@@ -78,7 +78,7 @@ namespace Flurl.Util
 				select new KeyValuePair<string, object>(prop.Name, val);
 #else
 			return from prop in obj.GetType().GetProperties() 
-				   let val = prop.GetValue(obj, null)
+				   let val = prop.GetValue(obj, index: null)
 				   select new KeyValuePair<string, object>(prop.Name, val);
 #endif
 		}
@@ -102,8 +102,8 @@ namespace Flurl.Util
 #endif
 
 				if (keyProp != null && valProp != null) {
-					key = keyProp.GetValue(item, null)?.ToInvariantString();
-					val = valProp.GetValue(item, null);
+					key = keyProp.GetValue(item, index: null)?.ToInvariantString();
+					val = valProp.GetValue(item, index: null);
 				}
 				else {
 					key = item.ToInvariantString();

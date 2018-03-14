@@ -161,7 +161,7 @@ namespace Flurl.Http.Testing
         /// <param name="urlPattern">URL that should not have been called. Can include * wildcard character.</param>
         public void ShouldNotHaveCalled(string urlPattern)
         {
-            new HttpCallAssertion(CallLog, true).WithUrlPattern(urlPattern);
+            new HttpCallAssertion(CallLog, negate: true).WithUrlPattern(urlPattern);
         }
 
         /// <summary>
@@ -177,7 +177,7 @@ namespace Flurl.Http.Testing
         /// </summary>
         public void ShouldNotHaveMadeACall()
         {
-            new HttpCallAssertion(CallLog, true).WithUrlPattern("*");
+            new HttpCallAssertion(CallLog, negate: true).WithUrlPattern("*");
         }
 
         /// <summary>
@@ -185,7 +185,7 @@ namespace Flurl.Http.Testing
         /// </summary>
         public void Dispose()
         {
-            SetCurrentTest(null);
+            SetCurrentTest(test: null);
         }
         private static void SetCurrentTest(HttpTest test) => System.Runtime.Remoting.Messaging.CallContext.LogicalSetData("FlurlHttpTest", test);
         private static HttpTest GetCurrentTest() => System.Runtime.Remoting.Messaging.CallContext.LogicalGetData("FlurlHttpTest") as HttpTest;

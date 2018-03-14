@@ -53,7 +53,7 @@ namespace Flurl.Http
 		/// <returns>A Task whose result is the received HttpResponseMessage.</returns>
 		public static Task<HttpResponseMessage> SendJsonAsync(this IFlurlRequest request, HttpMethod verb, object data, CancellationToken cancellationToken = default(CancellationToken), HttpCompletionOption completionOption = HttpCompletionOption.ResponseContentRead) {
 			var content = new CapturedJsonContent(request.Settings.JsonSerializer.Serialize(data));
-			return request.SendAsync(verb, content: content, cancellationToken: cancellationToken, completionOption: completionOption);
+			return request.SendAsync(verb, content, cancellationToken: cancellationToken, completionOption: completionOption);
 		}
 
 		/// <summary>
@@ -93,7 +93,7 @@ namespace Flurl.Http
 		/// <returns>A Task whose result is the received HttpResponseMessage.</returns>
 		public static Task<HttpResponseMessage> SendStringAsync(this IFlurlRequest request, HttpMethod verb, string data, CancellationToken cancellationToken = default(CancellationToken), HttpCompletionOption completionOption = HttpCompletionOption.ResponseContentRead) {
 			var content = new CapturedStringContent(data);
-			return request.SendAsync(verb, content: content, cancellationToken: cancellationToken, completionOption: completionOption);
+			return request.SendAsync(verb, content, cancellationToken: cancellationToken, completionOption: completionOption);
 		}
 
 		/// <summary>
@@ -133,7 +133,7 @@ namespace Flurl.Http
 		/// <returns>A Task whose result is the received HttpResponseMessage.</returns>
 		public static Task<HttpResponseMessage> SendUrlEncodedAsync(this IFlurlRequest request, HttpMethod verb, object data, CancellationToken cancellationToken = default(CancellationToken), HttpCompletionOption completionOption = HttpCompletionOption.ResponseContentRead) {
 			var content = new CapturedUrlEncodedContent(request.Settings.UrlEncodedSerializer.Serialize(data));
-			return request.SendAsync(verb, content: content, cancellationToken: cancellationToken, completionOption: completionOption);
+			return request.SendAsync(verb, content, cancellationToken: cancellationToken, completionOption: completionOption);
 		}
 
 		/// <summary>
@@ -402,7 +402,7 @@ namespace Flurl.Http
 		/// <param name="completionOption">The HttpCompletionOption used in the request. Optional.</param>
 		/// <returns>A Task whose result is the received HttpResponseMessage.</returns>
 		public static Task<HttpResponseMessage> PostAsync(this IFlurlRequest request, HttpContent content, CancellationToken cancellationToken = default(CancellationToken), HttpCompletionOption completionOption = HttpCompletionOption.ResponseContentRead) {
-			return request.SendAsync(HttpMethod.Post, content: content, cancellationToken: cancellationToken, completionOption: completionOption);
+			return request.SendAsync(HttpMethod.Post, content, cancellationToken: cancellationToken, completionOption: completionOption);
 		}
 
 		/// <summary>
@@ -439,7 +439,7 @@ namespace Flurl.Http
 		/// <returns>A Task whose result is the received HttpResponseMessage.</returns>
 		public static Task<HttpResponseMessage> PostJsonAsync(this IFlurlRequest request, object data, CancellationToken cancellationToken = default(CancellationToken), HttpCompletionOption completionOption = HttpCompletionOption.ResponseContentRead) {
 			var content = new CapturedJsonContent(request.Settings.JsonSerializer.Serialize(data));
-			return request.SendAsync(HttpMethod.Post, content: content, cancellationToken: cancellationToken, completionOption: completionOption);
+			return request.SendAsync(HttpMethod.Post, content, cancellationToken: cancellationToken, completionOption: completionOption);
 		}
 
 		/// <summary>
@@ -476,7 +476,7 @@ namespace Flurl.Http
 		/// <returns>A Task whose result is the received HttpResponseMessage.</returns>
 		public static Task<HttpResponseMessage> PostStringAsync(this IFlurlRequest request, string data, CancellationToken cancellationToken = default(CancellationToken), HttpCompletionOption completionOption = HttpCompletionOption.ResponseContentRead) {
 			var content = new CapturedStringContent(data);
-			return request.SendAsync(HttpMethod.Post, content: content, cancellationToken: cancellationToken, completionOption: completionOption);
+			return request.SendAsync(HttpMethod.Post, content, cancellationToken: cancellationToken, completionOption: completionOption);
 		}
 
 		/// <summary>
@@ -513,7 +513,7 @@ namespace Flurl.Http
 		/// <returns>A Task whose result is the received HttpResponseMessage.</returns>
 		public static Task<HttpResponseMessage> PostUrlEncodedAsync(this IFlurlRequest request, object data, CancellationToken cancellationToken = default(CancellationToken), HttpCompletionOption completionOption = HttpCompletionOption.ResponseContentRead) {
 			var content = new CapturedUrlEncodedContent(request.Settings.UrlEncodedSerializer.Serialize(data));
-			return request.SendAsync(HttpMethod.Post, content: content, cancellationToken: cancellationToken, completionOption: completionOption);
+			return request.SendAsync(HttpMethod.Post, content, cancellationToken: cancellationToken, completionOption: completionOption);
 		}
 
 		/// <summary>
@@ -582,7 +582,7 @@ namespace Flurl.Http
 		/// <param name="completionOption">The HttpCompletionOption used in the request. Optional.</param>
 		/// <returns>A Task whose result is the received HttpResponseMessage.</returns>
 		public static Task<HttpResponseMessage> PutAsync(this IFlurlRequest request, HttpContent content, CancellationToken cancellationToken = default(CancellationToken), HttpCompletionOption completionOption = HttpCompletionOption.ResponseContentRead) {
-			return request.SendAsync(HttpMethod.Put, content: content, cancellationToken: cancellationToken, completionOption: completionOption);
+			return request.SendAsync(HttpMethod.Put, content, cancellationToken: cancellationToken, completionOption: completionOption);
 		}
 
 		/// <summary>
@@ -619,7 +619,7 @@ namespace Flurl.Http
 		/// <returns>A Task whose result is the received HttpResponseMessage.</returns>
 		public static Task<HttpResponseMessage> PutJsonAsync(this IFlurlRequest request, object data, CancellationToken cancellationToken = default(CancellationToken), HttpCompletionOption completionOption = HttpCompletionOption.ResponseContentRead) {
 			var content = new CapturedJsonContent(request.Settings.JsonSerializer.Serialize(data));
-			return request.SendAsync(HttpMethod.Put, content: content, cancellationToken: cancellationToken, completionOption: completionOption);
+			return request.SendAsync(HttpMethod.Put, content, cancellationToken: cancellationToken, completionOption: completionOption);
 		}
 
 		/// <summary>
@@ -656,7 +656,7 @@ namespace Flurl.Http
 		/// <returns>A Task whose result is the received HttpResponseMessage.</returns>
 		public static Task<HttpResponseMessage> PutStringAsync(this IFlurlRequest request, string data, CancellationToken cancellationToken = default(CancellationToken), HttpCompletionOption completionOption = HttpCompletionOption.ResponseContentRead) {
 			var content = new CapturedStringContent(data);
-			return request.SendAsync(HttpMethod.Put, content: content, cancellationToken: cancellationToken, completionOption: completionOption);
+			return request.SendAsync(HttpMethod.Put, content, cancellationToken: cancellationToken, completionOption: completionOption);
 		}
 
 		/// <summary>
@@ -725,7 +725,7 @@ namespace Flurl.Http
 		/// <param name="completionOption">The HttpCompletionOption used in the request. Optional.</param>
 		/// <returns>A Task whose result is the received HttpResponseMessage.</returns>
 		public static Task<HttpResponseMessage> PatchAsync(this IFlurlRequest request, HttpContent content, CancellationToken cancellationToken = default(CancellationToken), HttpCompletionOption completionOption = HttpCompletionOption.ResponseContentRead) {
-			return request.SendAsync(new HttpMethod("PATCH"), content: content, cancellationToken: cancellationToken, completionOption: completionOption);
+			return request.SendAsync(new HttpMethod("PATCH"), content, cancellationToken: cancellationToken, completionOption: completionOption);
 		}
 
 		/// <summary>
@@ -762,7 +762,7 @@ namespace Flurl.Http
 		/// <returns>A Task whose result is the received HttpResponseMessage.</returns>
 		public static Task<HttpResponseMessage> PatchJsonAsync(this IFlurlRequest request, object data, CancellationToken cancellationToken = default(CancellationToken), HttpCompletionOption completionOption = HttpCompletionOption.ResponseContentRead) {
 			var content = new CapturedJsonContent(request.Settings.JsonSerializer.Serialize(data));
-			return request.SendAsync(new HttpMethod("PATCH"), content: content, cancellationToken: cancellationToken, completionOption: completionOption);
+			return request.SendAsync(new HttpMethod("PATCH"), content, cancellationToken: cancellationToken, completionOption: completionOption);
 		}
 
 		/// <summary>
@@ -799,7 +799,7 @@ namespace Flurl.Http
 		/// <returns>A Task whose result is the received HttpResponseMessage.</returns>
 		public static Task<HttpResponseMessage> PatchStringAsync(this IFlurlRequest request, string data, CancellationToken cancellationToken = default(CancellationToken), HttpCompletionOption completionOption = HttpCompletionOption.ResponseContentRead) {
 			var content = new CapturedStringContent(data);
-			return request.SendAsync(new HttpMethod("PATCH"), content: content, cancellationToken: cancellationToken, completionOption: completionOption);
+			return request.SendAsync(new HttpMethod("PATCH"), content, cancellationToken: cancellationToken, completionOption: completionOption);
 		}
 
 		/// <summary>

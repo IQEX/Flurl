@@ -43,9 +43,9 @@ namespace Flurl
 			if (baseUrl == null)
 				throw new ArgumentNullException(nameof(baseUrl));
 
-			var parts = baseUrl.SplitOnFirstOccurence('#');
+			var parts = baseUrl.SplitOnFirstOccurence(separator: '#');
 			Fragment = (parts.Length == 2) ? parts[1] : "";
-			parts = parts[0].SplitOnFirstOccurence('?');
+			parts = parts[0].SplitOnFirstOccurence(separator: '?');
 			Query = (parts.Length == 2) ? parts[1] : "";
 			Path = parts[0];
 		}
@@ -63,10 +63,10 @@ namespace Flurl
 
 			result.AddRange(
 				from p in query.Split('&')
-				let pair = p.SplitOnFirstOccurence('=')
+				let pair = p.SplitOnFirstOccurence(separator: '=')
 				let name = pair[0]
 				let value = (pair.Length == 1) ? null : pair[1]
-				select new QueryParameter(name, value, true));
+				select new QueryParameter(name, value, isEncoded: true));
 
 			return result;
 		}
@@ -89,15 +89,15 @@ namespace Flurl
 				    continue;
 
 				if (result.EndsWith("?") || part.StartsWith("?"))
-					result = CombineEnsureSingleSeperator(result, part, '?');
+					result = CombineEnsureSingleSeperator(result, part, seperator: '?');
 				else if (result.EndsWith("#") || part.StartsWith("#"))
-					result = CombineEnsureSingleSeperator(result, part, '#');
+					result = CombineEnsureSingleSeperator(result, part, seperator: '#');
 				else if (inFragment)
 					result += part;
 				else if (inQuery)
-					result = CombineEnsureSingleSeperator(result, part, '&');
+					result = CombineEnsureSingleSeperator(result, part, seperator: '&');
 				else
-					result = CombineEnsureSingleSeperator(result, part, '/');
+					result = CombineEnsureSingleSeperator(result, part, seperator: '/');
 
 			    if (part.Contains("#")) {
 					inQuery = false;
@@ -182,8 +182,8 @@ namespace Flurl
 
 			// pick out all %-hex-hex matches and avoid double-encoding 
 			return Regex.Replace(s, "(.*?)((%[0-9A-Fa-f]{2})|$)", c => {
-				var a = c.Groups[1].Value; // group 1 is a sequence with no %-encoding - encode illegal characters
-				var b = c.Groups[2].Value; // group 2 is a valid 3-character %-encoded sequence - leave it alone!
+				var a = c.Groups[groupnum: 1].Value; // group 1 is a sequence with no %-encoding - encode illegal characters
+				var b = c.Groups[groupnum: 2].Value; // group 2 is a valid 3-character %-encoded sequence - leave it alone!
 				return Uri.EscapeUriString(a) + b;
 			});
 		}
@@ -203,7 +203,7 @@ namespace Flurl
 				Uri.EscapeDataString(segment.ToInvariantString()) :
 				EncodeIllegalCharacters(segment.ToInvariantString());
 
-			Path = CombineEnsureSingleSeperator(Path, encoded.Replace("?", "%3F"), '/');
+			Path = CombineEnsureSingleSeperator(Path, encoded.Replace("?", "%3F"), seperator: '/');
 			return this;
 		}
 
@@ -245,7 +245,7 @@ namespace Flurl
 		/// <param name="nullValueHandling">Indicates how to handle null values. Defaults to Remove (any existing)</param>
 		/// <returns>The Url object with the query parameter added</returns>
 		public Url SetQueryParam(string name, object value, NullValueHandling nullValueHandling = NullValueHandling.Remove) {
-			SetQueryParamInternal(name, value, false, nullValueHandling);
+			SetQueryParamInternal(name, value, isEncoded: false, nullValueHandling: nullValueHandling);
 			return this;
 		}
 
@@ -269,7 +269,7 @@ namespace Flurl
 		/// <param name="name">Name of query parameter</param>
 		/// <returns>The Url object with the query parameter added</returns>
 		public Url SetQueryParam(string name) {
-			SetQueryParamInternal(name, null, false, NullValueHandling.NameOnly);
+			SetQueryParamInternal(name, value: null, isEncoded: false, nullValueHandling: NullValueHandling.NameOnly);
 			return this;
 		}
 
@@ -291,7 +291,7 @@ namespace Flurl
 				return this;
 
 			foreach (var kv in values.ToKeyValuePairs())
-				SetQueryParamInternal(kv.Key, kv.Value, false, nullValueHandling);
+				SetQueryParamInternal(kv.Key, kv.Value, isEncoded: false, nullValueHandling: nullValueHandling);
 
 			return this;
 		}
@@ -398,7 +398,7 @@ namespace Flurl
 		/// </summary>
 		/// <returns></returns>
 		public override string ToString() {
-			return ToString(false);
+			return ToString(encodeSpaceAsPlus: false);
 		}
 
 		/// <summary>

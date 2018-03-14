@@ -123,7 +123,7 @@ namespace Flurl.Http
             var request = new HttpRequestMessage(verb, Url) { Content = content };
             var call = new HttpCall(this, request);
 
-            await HandleEventAsync(Settings.BeforeCall, Settings.BeforeCallAsync, call).ConfigureAwait(false);
+            await HandleEventAsync(Settings.BeforeCall, Settings.BeforeCallAsync, call).ConfigureAwait(continueOnCapturedContext: false);
             request.RequestUri = new Uri(Url); // in case it was modifed in the handler above
 
             var userToken = cancellationToken ?? CancellationToken.None;
@@ -146,7 +146,7 @@ namespace Flurl.Http
                 if (Client.CheckAndRenewConnectionLease())
                     request.Headers.ConnectionClose = true;
 
-                call.Response = await Client.HttpClient.SendAsync(request, completionOption, token).ConfigureAwait(false);
+                call.Response = await Client.HttpClient.SendAsync(request, completionOption, token).ConfigureAwait(continueOnCapturedContext: false);
                 call.Response.RequestMessage = request;
 
                 if (call.Succeeded)
@@ -154,14 +154,14 @@ namespace Flurl.Http
 
                 // response content is only awaited here if the call failed.
                 if (call.Response.Content != null)
-                    call.ErrorResponseBody = await call.Response.Content.StripCharsetQuotes().ReadAsStringAsync().ConfigureAwait(false);
+                    call.ErrorResponseBody = await call.Response.Content.StripCharsetQuotes().ReadAsStringAsync().ConfigureAwait(continueOnCapturedContext: false);
 
-                throw new FlurlHttpException(call, null);
+                throw new FlurlHttpException(call, inner: null);
             }
             catch (Exception ex)
             {
                 call.Exception = ex;
-                await HandleEventAsync(Settings.OnError, Settings.OnErrorAsync, call).ConfigureAwait(false);
+                await HandleEventAsync(Settings.OnError, Settings.OnErrorAsync, call).ConfigureAwait(continueOnCapturedContext: false);
 
                 if (call.ExceptionHandled)
                     return call.Response;
@@ -181,7 +181,7 @@ namespace Flurl.Http
                     ReadResponseCookies(call.Response);
 
                 call.EndedUtc = DateTime.UtcNow;
-                await HandleEventAsync(Settings.AfterCall, Settings.AfterCallAsync, call).ConfigureAwait(false);
+                await HandleEventAsync(Settings.AfterCall, Settings.AfterCallAsync, call).ConfigureAwait(continueOnCapturedContext: false);
             }
         }
 
@@ -263,7 +263,7 @@ namespace Flurl.Http
             syncHandler?.Invoke(call);
             if (asyncHandler != null)
                 return asyncHandler(call);
-            return Task.FromResult(0);
+            return Task.FromResult(result: 0);
         }
     }
 }
