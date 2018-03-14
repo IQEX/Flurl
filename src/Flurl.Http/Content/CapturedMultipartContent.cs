@@ -36,7 +36,7 @@ namespace Flurl.Http.Content
 		/// <param name="content">The HttpContent of the part.</param>
 		/// <returns>This CapturedMultipartContent instance (supports method chaining).</returns>
 		public CapturedMultipartContent Add(string name, HttpContent content) {
-			return AddInternal(name, content, null);
+			return AddInternal(name, content, fileName: null);
 		}
 
 		/// <summary>

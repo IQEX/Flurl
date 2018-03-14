@@ -98,11 +98,11 @@ namespace Flurl.Http
 		public IFlurlRequest Request(params object[] urlSegments) {
 			var parts = new List<string>(urlSegments.Select(s => s.ToInvariantString()));
 			if (!Url.IsValid(parts.FirstOrDefault()) && !string.IsNullOrEmpty(BaseUrl))
-				parts.Insert(0, BaseUrl);
+				parts.Insert(index: 0, item: BaseUrl);
 
 			if (!parts.Any())
 				throw new ArgumentException("Cannot create a Request. BaseUrl is not defined and no segments were passed.");
-			if (!Url.IsValid(parts[0]))
+			if (!Url.IsValid(parts[index: 0]))
 				throw new ArgumentException("Cannot create a Request. Neither BaseUrl nor the first segment passed is a valid URL.");
 
 			return new FlurlRequest(Url.Combine(parts.ToArray())).WithClient(this);

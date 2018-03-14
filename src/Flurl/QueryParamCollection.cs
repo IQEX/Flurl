@@ -15,7 +15,7 @@ namespace Flurl
 		/// </summary>
 		/// <returns></returns>
 		public override string ToString() {
-			return ToString(false);
+			return ToString(encodeSpaceAsPlus: false);
 		}
 
 		/// <summary>

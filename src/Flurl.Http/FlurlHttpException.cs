@@ -36,7 +36,7 @@ namespace Flurl.Http
 		/// Initializes a new instance of the <see cref="FlurlHttpException"/> class.
 		/// </summary>
 		/// <param name="call">The call.</param>
-		public FlurlHttpException(HttpCall call) : this(call, BuildMessage(call, null), null) { }
+		public FlurlHttpException(HttpCall call) : this(call, BuildMessage(call, inner: null), inner: null) { }
 
 		private static string BuildMessage(HttpCall call, Exception inner) {
 			var sb = new StringBuilder();

@@ -25,7 +25,7 @@ namespace Flurl.Http.Configuration
                 if (kv.Value == null) continue;
                 qp[kv.Key] = new QueryParameter(kv.Key, kv.Value);
             }
-            return qp.ToString(true);
+            return qp.ToString(encodeSpaceAsPlus: true);
 		}
 
 		/// <summary>

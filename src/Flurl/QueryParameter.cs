@@ -23,7 +23,7 @@ namespace Flurl
 			Name = name;
 			if (isEncoded && value != null) {
 				_encodedValue = value as string;
-				_value = Url.Decode(_encodedValue, true);
+				_value = Url.Decode(_encodedValue, interpretPlusAsSpace: true);
 			}
 			else {
 				Value = value;
@@ -55,7 +55,7 @@ namespace Flurl
 			if (_value is IEnumerable && !(_value is string)) {
 				return string.Join("&",
 					from v in (_value as IEnumerable).Cast<object>()
-					select BuildPair(Name, v, false, encodeSpaceAsPlus));
+					select BuildPair(Name, v, valueIsEncoded: false, encodeSpaceAsPlus: encodeSpaceAsPlus));
 			}
 			return BuildPair(Name, _encodedValue ?? Value, _encodedValue != null, encodeSpaceAsPlus);
 		}

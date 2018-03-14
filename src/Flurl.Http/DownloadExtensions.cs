@@ -19,7 +19,7 @@ namespace Flurl.Http
 		/// <param name="bufferSize">Buffer size in bytes. Default is 4096.</param>
 		/// <returns>A Task whose result is the local path of the downloaded file.</returns>
 		public static async Task<string> DownloadFileAsync(this IFlurlRequest request, string localFolderPath, string localFileName = null, int bufferSize = 4096) {
-			var response = await request.SendAsync(HttpMethod.Get, completionOption: HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
+			var response = await request.SendAsync(HttpMethod.Get, completionOption: HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(continueOnCapturedContext: false);
 
 			localFileName =
 				localFileName ??
@@ -27,9 +27,9 @@ namespace Flurl.Http
 				request.Url.Path.Split('/').Last();
 
 			// http://codereview.stackexchange.com/a/18679
-			using (var httpStream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false))
-			using (var filestream = await FileUtil.OpenWriteAsync(localFolderPath, localFileName, bufferSize).ConfigureAwait(false)) {
-				await httpStream.CopyToAsync(filestream, bufferSize).ConfigureAwait(false);
+			using (var httpStream = await response.Content.ReadAsStreamAsync().ConfigureAwait(continueOnCapturedContext: false))
+			using (var filestream = await FileUtil.OpenWriteAsync(localFolderPath, localFileName, bufferSize).ConfigureAwait(continueOnCapturedContext: false)) {
+				await httpStream.CopyToAsync(filestream, bufferSize).ConfigureAwait(continueOnCapturedContext: false);
 			}
 
 			return FileUtil.CombinePath(localFolderPath, localFileName);

@@ -34,8 +34,8 @@ namespace Flurl.Http.Content
 		/// <param name="context">The context.</param>
 		/// <returns></returns>
 		protected override async Task SerializeToStreamAsync(Stream stream, TransportContext context) {
-			using (var source = await FileUtil.OpenReadAsync(Path, _bufferSize).ConfigureAwait(false)) {
-				await source.CopyToAsync(stream, _bufferSize).ConfigureAwait(false);
+			using (var source = await FileUtil.OpenReadAsync(Path, _bufferSize).ConfigureAwait(continueOnCapturedContext: false)) {
+				await source.CopyToAsync(stream, _bufferSize).ConfigureAwait(continueOnCapturedContext: false);
 			}
 		}
 
