@@ -1,9 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
-    <TargetFramework>net471</TargetFramework>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-	  <PackageId>Flurl.Http</PackageId>
+    <PackageId>Flurl.Http</PackageId>
     <Version>2.2.0-pre2</Version>
     <Authors>Todd Menier</Authors>
     <Description>Flurl.Http is a fluent, portable, testable HTTP client library that extends Flurl's URL builder chain.</Description>
@@ -13,52 +11,42 @@
     <RepositoryUrl>https://github.com/tmenier/Flurl.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>httpclient rest json http fluent url uri tdd assert async</PackageTags>
-	  <PackageReleaseNotes>https://github.com/tmenier/Flurl/releases</PackageReleaseNotes>
+    <PackageReleaseNotes>https://github.com/tmenier/Flurl/releases</PackageReleaseNotes>
     <IncludeProjectPriFile>false</IncludeProjectPriFile>
     <Platforms>AnyCPU;x86</Platforms>
+    <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
-
   <PropertyGroup>
     <TreatWarningsAsErrors>True</TreatWarningsAsErrors>
   </PropertyGroup>
-
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <DocumentationFile>bin\Release\Flurl.Http.xml</DocumentationFile>
   </PropertyGroup>
-
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x86'">
     <DocumentationFile>bin\Release\Flurl.Http.xml</DocumentationFile>
   </PropertyGroup>
-
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
+    <PackageReference Include="System.Text.Encoding.CodePages" Version="4.5.0" />
   </ItemGroup>
-
   <ItemGroup Condition="'$(TargetFramework)' == 'netstandard1.3'">
     <PackageReference Include="System.IO.FileSystem" Version="4.3.0" />
-    <PackageReference Include="System.Text.Encoding.CodePages" Version="4.3.0" />
   </ItemGroup>
-
   <ItemGroup Condition="'$(TargetFramework)' == 'netstandard1.1'">
     <PackageReference Include="PCLStorage" Version="1.0.2" />
   </ItemGroup>
-
   <PropertyGroup>
     <PackageTargetFallback Condition="'$(TargetFramework)'=='netstandard1.1'">portable-net45+win8+wp8</PackageTargetFallback>
   </PropertyGroup>
-
   <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net45|AnyCPU'">
     <DocumentationFile>bin\Debug\net45\Flurl.Http.xml</DocumentationFile>
   </PropertyGroup>
-
   <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net45|x86'">
     <DocumentationFile>bin\Debug\net45\Flurl.Http.xml</DocumentationFile>
   </PropertyGroup>
-  
   <ItemGroup Condition="'$(TargetFramework)' == 'net45'">
     <Reference Include="System.Net.Http" />
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\Flurl\Flurl.csproj" />
   </ItemGroup>

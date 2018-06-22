@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Threading;
 using Flurl.Http.Configuration;
 using Flurl.Http.Content;
 using Flurl.Util;
@@ -187,7 +188,10 @@ namespace Flurl.Http.Testing
         {
             SetCurrentTest(test: null);
         }
-        private static void SetCurrentTest(HttpTest test) => System.Runtime.Remoting.Messaging.CallContext.LogicalSetData("FlurlHttpTest", test);
-        private static HttpTest GetCurrentTest() => System.Runtime.Remoting.Messaging.CallContext.LogicalGetData("FlurlHttpTest") as HttpTest;
+
+        private static void SetCurrentTest(HttpTest test) => FlurlHttpTest.Value = test;
+        private static HttpTest GetCurrentTest() => FlurlHttpTest.Value;
+        
+        static readonly AsyncLocal<HttpTest> FlurlHttpTest = new AsyncLocal<HttpTest>();
     }
 }
