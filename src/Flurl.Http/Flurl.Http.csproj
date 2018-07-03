@@ -15,6 +15,7 @@
     <IncludeProjectPriFile>false</IncludeProjectPriFile>
     <Platforms>AnyCPU;x86</Platforms>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <LangVersion>7.2</LangVersion>
   </PropertyGroup>
   <PropertyGroup>
     <TreatWarningsAsErrors>True</TreatWarningsAsErrors>
@@ -49,5 +50,8 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Flurl\Flurl.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="NETStandard.Library" Version="2.0.3" />
   </ItemGroup>
 </Project>
