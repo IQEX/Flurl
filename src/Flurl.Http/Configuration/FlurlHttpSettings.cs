@@ -4,6 +4,7 @@ using System.Linq.Expressions;
 using System.Reflection;
 using System.Threading.Tasks;
 using Flurl.Http.Testing;
+using Newtonsoft.Json;
 
 namespace Flurl.Http.Configuration
 {
