@@ -1,9 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
-    <TargetFramework>net471</TargetFramework>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-		<PackageId>Flurl</PackageId>
+    <PackageId>Flurl</PackageId>
     <Version>2.7.0-pre2</Version>
     <Authors>Todd Menier</Authors>
     <Description>A fluent, portable URL builder. To make HTTP calls off the fluent chain, check out Flurl.Http.</Description>
@@ -14,23 +12,23 @@
     <RepositoryType>git</RepositoryType>
     <PackageTags>fluent url uri querystring builder</PackageTags>
     <PackageReleaseNotes>https://github.com/tmenier/Flurl/releases</PackageReleaseNotes>
-	  <IncludeProjectPriFile>false</IncludeProjectPriFile>
+    <IncludeProjectPriFile>false</IncludeProjectPriFile>
+    <Platforms>AnyCPU</Platforms>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <Configurations>Debug;Release</Configurations>
   </PropertyGroup>
-
   <PropertyGroup>
     <TreatWarningsAsErrors>True</TreatWarningsAsErrors>
   </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <DocumentationFile>bin\Release\Flurl.xml</DocumentationFile>
+  <PropertyGroup>
+    <DebugType>full</DebugType>
+    <OutputPath>bin\x86\Debug\netstandard2.0\</OutputPath>
   </PropertyGroup>
-
-  <ItemGroup Condition="'$(TargetFramework)' == 'netstandard1.3'">
-    <PackageReference Include="System.Reflection.TypeExtensions" Version="4.3.0" />
-  </ItemGroup>
-
   <ItemGroup>
+    <PackageReference Include="Microsoft.CSharp" Version="4.5.0" />
+    <PackageReference Include="NuGet.Build.Tasks.Pack" Version="4.7.0" />
     <PackageReference Include="System.Net.Http" Version="4.3.3" />
+    <PackageReference Include="System.Reflection.TypeExtensions" Version="4.3.0" />
+    <PackageReference Include="NETStandard.Library" Version="2.0.3" />
   </ItemGroup>
-
 </Project>
